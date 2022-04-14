@@ -1,0 +1,58 @@
+# Battleship
+For this project we care about three things:
+1. Project functionality - does it work? Can we have a great time playing battleship!?
+
+2. Design - is the code well written? Did you make good design choices? A large part of this is separating your code into various objects, choosing wisely where each piece of functionality goes, and of course following MVC guidelines. 
+
+3. Teamwork - this is the first time in this class that you have worked with someone else. This is the standard in industry jobs. I want you to learn how to work with someone else both from a personal standpoint, but also using the tools necessary, primarily Github.
+
+Watch the walk through of the bare-bones version here: https://youtu.be/M-grvoet7m0
+
+You will use the same repository as you used for lab3.
+
+## Implementation
+GUI - I would love to see you use your creativity here. But I can describe what I used to implement the GUI so you can target a baseline. My outermost node is a VBox. Nested in this VBox is an HBox. Within the HBox are two Panes. The HBox is nested within the VBox in order to center it vertically within the scene. Each Pane contains a two dimensional array of Rectangle objects. 
+
+Events - I have various event listeners in order to accomplish the base functionality.
+
+		setOnKeyReleased in order to listen to the user entering an 'R' to rotate ships as they are placed. 
+
+		setOnMouseMoved in order to show the user where the ship would go if the user were to click.
+
+		setOnMouseClicked in order to place a ship.
+
+		setOnMouseClicked in order to 'fire' a missile. i.e. in order to guess a square in your opponent's grid.
+
+Networking - This will perhaps be the most difficult part of the assignment. It is the only 'new' part, code unlike what you have written thus far. I want to mention two different things.
+
+You must define a protocol. In the networking demo in class, the protocol we defined was the client sent messages to the server. Obviously in this assignment, the client and server will both need to send and receive objects to/from each other. You need to strictly define the order in which these objects are sent. I will describe my protocol but you are welcome to do this in whatever way you want. Once all the ships are placed, the server goes first. The server sends an object indicating which square they are choosing. The client receives this object and then sends back an updated grid for the server to display. It is now the client's turn. The client now chooses a square to 'fire' at by sending an object to the server. The server receives this object and then sends back an updated grid for the client to display. You will need to define an object or objects to send back and forth between the server and client. 
+
+If the server is guessing, it sends an object to the client whenever the user clicks their mouse on a valid square. There is no need for a loop, or anything fancy here. But seen from the client, the client has no idea when a message will arrive. This requires code constantly running ready to receive a message at any point in time. This requires a loop to run throughout the game. If this is done on the main thread though, the UI can never update or listen/respond to events. This loop needs to occur on a separate thread. Luckily this isn't too difficult. Just use a Thread object like we saw in class. 
+## Hints/Tips/Tricks
+This is a complicated project. Decompose it into smaller, easier to create parts. Decomposition in Java is done by creating different objects for the different 'nouns' of the program. I would expect many different classes for this program. I would expect at least 6-8 different objects. But it will vary. These objects should have well-defined interfaces. 
+
+Just like last project, GUI code can get messy. Use constants!
+
+Each player should have 7 ships with sizes: {5, 4, 3, 2, 2, 1, 1}.
+
+java.awt.Point is a nice class that combines an x and y to be a coordinate.
+
+Remember to handle errors in a user-intuitive way. Some issues are obvious, I personally don't feel the need to tell the user they can't place a ship only partially on the grid. What do you think about a user trying to guess a square they have already guessed?
+
+Create a nice ending to your game! The user who lost would definitely want to see where all their opponent's ships are!
+
+Remember to use the observer/observable pattern. I think you will see its power now that we are getting updates from the network. It is convenient to receive an object over the network, make whatever changes are necessary in your model, then simply notify your observers!
+
+## Documentation
+We want a professional product. That necessarily must include:
+
+1.  Javadoc comments
+
+2.  UML Diagrams
+
+3.  JUnit test cases.
+
+## Submission
+ 
+ As always, the last pushed commit prior to the due date will be graded.
+**Due Friday 4/15 at 9AM**
