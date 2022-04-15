@@ -5,5 +5,7 @@
 package application;
 
 public class BattleshipModel {
+	
+	private Board board;
 
 }

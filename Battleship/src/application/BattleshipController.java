@@ -12,21 +12,28 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class BattleshipController {
+	
+	private BattleshipModel model;
 
 	public BattleshipController(String user) {
+		model = new BattleshipModel();
+		// if this is the server, setup connection
 		if (user.toUpperCase().equals("SERVER")) {
 			try {
 				ServerSocket server = new ServerSocket(4000);
 				Socket connection = server.accept();
 				ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
 				ObjectInputStream input = new ObjectInputStream(connection.getInputStream());
-				// Do some IO.
+				
+				
+				
 				connection.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		// if this is the client, connect to server
 		else if (user.toUpperCase().equals("CLIENT")) {
 			try {
 				Socket server = new Socket("localhost", 4000);

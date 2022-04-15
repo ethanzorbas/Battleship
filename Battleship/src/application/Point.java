@@ -19,7 +19,7 @@ public class Point {
 	/**
 	 * call when this point has been hit to check it has a hit location
 	 */
-	public void hitLocation() {
+	public void setAsHit() {
 		hit = true;
 	}
 	
