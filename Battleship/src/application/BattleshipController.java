@@ -51,5 +51,13 @@ public class BattleshipController {
 			
 		}
 	}
+	
+	public Board getPlayerBoard() {
+		return model.getPlayerBoard();
+	}
+	
+	public Board getEnemyBoard() {
+		return model.getEnemyBoard();
+	}
 
 }
