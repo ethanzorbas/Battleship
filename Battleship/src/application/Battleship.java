@@ -29,7 +29,7 @@ public class Battleship extends Application {
 			
 			BattleshipController controller = new BattleshipController(user);
 			
-			stage.setTitle("Battleship");
+			stage.setTitle("Battleship" + user.toUpperCase());
 			
 			Button testButton = new Button("testing");
 			Button testButton2 = new Button("testing2");
